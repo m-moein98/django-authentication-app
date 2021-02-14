@@ -1,0 +1,56 @@
+{% extends "auth_app/base.html" %}
+{% block content %}
+{% load static %}
+
+	<!-- popup and redirection after user logged in -->
+	<!-- <script>
+	swal("We've sent a link to you Email",{
+		icon : "success",
+		timer: 3000,
+		});
+		setTimeout(function () {
+      		 window.location.href = "google.com"; //will redirect to your blog page (an ex: blog.html)
+    	}, 3000);
+	</script> -->
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" style="margin-top: -80px;"  data-tilt>
+					<img src="{%static 'images/img-01.png'%}" alt="IMG" style="margin-top: -70px;">
+				</div>
+				{% if user.is_authenticated %}
+				<div class="login100-form">
+					<span class="login100-form-title">
+						{{user.username}}
+					</span>
+					<form class="login100-form validate-form" method="POST">
+						{% csrf_token %}
+						<div class="container-login100-form-btn">
+							<button class="login100-form-btn">
+								Logout
+							</button>
+						</div>
+					</form>
+				</div>
+				{% endif %}
+				{% if not user.is_authenticated %}
+				<div class="login100-form">
+					{% csrf_token %}
+					<span class="login100-form-title">
+						You Are Not Logged In
+					</span>
+					<div class="container-login100-form-btn">
+						<a href="{%url 'login' %}">
+						<button class="login100-form-btn">
+							Login
+						</button>
+						</a>
+					</div>
+				</div>
+				{% endif %}
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

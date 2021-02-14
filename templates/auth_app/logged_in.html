@@ -1,0 +1,23 @@
+{% extends "auth_app/base.html" %}
+{% block content %}
+{% load static %}
+    {% if User is not none %}
+	<div class="limiter">
+		<div class="container-login100">
+            <!-- popup and redirection after user logged in -->
+            {% if my_user %}
+            <script>
+                swal("You Logged In Successfully {{user.username}}",{
+                    icon : "success",
+                    timer: 3000,
+                    });
+                setTimeout(
+                    function () {window.location.href = "{%url 'login'  %}";},
+                    3000);
+            </script>
+            {% endif %}
+		</div>
+    </div>
+    {% endif %}
+
+{% endblock %}
